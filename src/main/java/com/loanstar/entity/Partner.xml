@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.PartnerDao">
+    <select id="getPartAll" parameterType="map" resultType="PartnerDto">
+        SELECT p.*,r.role_name,f.facility_orgization_name,d.department_industry_title FROM partner p,role r,facility f,department d WHERE p.role_id=r.role_id AND p.facility_id=f.facility_id
+        AND p.department_id=d.department_id
+        <if test="facility_orgization_name != null  and facility_orgization_name != ''">
+            AND facility_orgization_name like concat(concat('%',#{facility_orgization_name}),'%')
+        </if>
+        <if test="partner_name != null  and partner_name != ''">
+            AND partner_name like concat(concat('%',#{partner_name}),'%')
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+
+    <select id="getPartPage" resultType="int">
+        SELECT COUNT(*) FROM partner p,role r,facility f,department d WHERE p.role_id=r.role_id AND p.facility_id=f.facility_id
+        AND p.department_id=d.department_id
+        <if test="facility_orgization_name != null  and facility_orgization_name != ''">
+            AND facility_orgization_name like concat(concat('%',#{facility_orgization_name}),'%')
+        </if>
+        <if test="partner_name != null  and partner_name != ''">
+            AND partner_name like concat(concat('%',#{partner_name}),'%')
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <update id="djChange" parameterType="map">
+        UPDATE partner SET partner_sate=#{partner_sate} WHERE partner_id=#{partner_id}
+    </update>
+
+
+    <delete id="deletePartner" parameterType="int">
+        DELETE FROM partner WHERE partner_id=#{partner_id}
+    </delete>
+
+
+    <insert id="addPartner" parameterType="Partner">
+        INSERT INTO partner(partner_time,partner_character,partner_name,partner_address,partner_telphone,facility_id,role_id,department_id)
+        VALUES (#{partner_time},#{partner_character},#{partner_name},#{partner_address},#{partner_telphone},#{facility_id},#{role_id},#{department_id})
+    </insert>
+
+
+    <select id="getRole_id" parameterType="string" resultType="int">
+        SELECT role_id FROM Role WHERE role_name=#{role_name}
+    </select>
+
+    <select id="getFacility_id" parameterType="string" resultType="int">
+        SELECT facility_id FROM facility WHERE facility_orgization_name=#{facility_orgization_name}
+    </select>
+
+    <select id="getDepartment_id" parameterType="string" resultType="int">
+        SELECT department_id FROM department WHERE department_industry_title=#{department_industry_title}
+    </select>
+
+    <select id="getRoleNames" resultType="string">
+        SELECT DISTINCT role_name FROM role
+    </select>
+
+
+    <select id="getFacilityNames" resultType="string">
+        SELECT DISTINCT facility_orgization_name FROM facility
+    </select>
+
+
+    <select id="getDepartmentNames" resultType="string">
+        SELECT DISTINCT department_industry_title FROM department
+    </select>
+
+    <insert id="addAdministrator" parameterType="administrator">
+        INSERT INTO administrator(administrator_character,administrator_register_time,administrator_name)
+        VALUES (#{administrator_character},#{administrator_register_time},#{administrator_name})
+    </insert>
+
+
+    <select id="getAdministrator" parameterType="string" resultType="administrator">
+        SELECT * FROM administrator WHERE administrator_character=#{administrator_character}
+    </select>
+
+
+    <select id="getDepartment_number_quantity" parameterType="string" resultType="int">
+        SELECT department_number_quantity FROM department WHERE department_industry_title=#{department_industry_title}
+    </select>
+
+
+    <update id="updateDepartment_number_quantity" parameterType="map">
+        UPDATE department SET department_number_quantity=#{department_number_quantity} WHERE department_industry_title=#{department_industry_title}
+    </update>
+
+    <select id="getAdministrator_character" parameterType="int" resultType="string">
+        SELECT partner_character FROM partner WHERE partner_id=#{partner_id}
+    </select>
+
+    <update id="updateDj" parameterType="map">
+        UPDATE administrator SET administrator_state=#{administrator_state} WHERE administrator_character=#{administrator_character}
+    </update>
+
+    <delete id="deleteAdministrator" parameterType="string">
+        DELETE FROM administrator WHERE administrator_character=#{administrator_character}
+    </delete>
+
+
+    <select id="getPartnerFacilityNames" resultType="string">
+        SELECT DISTINCT facility_orgization_name FROM facility f,partner p WHERE f.facility_id=p.facility_id
+    </select>
+
+    <select id="getPartnerNames" resultType="string">
+        SELECT DISTINCT partner_name FROM partner
+    </select>
+
+    <update id="updatePartner" parameterType="Partner">
+        UPDATE partner SET partner_name=#{partner_name},partner_address=#{partner_address},partner_telphone=#{partner_telphone},
+         facility_id=#{facility_id},role_id=#{role_id},department_id=#{department_id} WHERE partner_id=#{partner_id}
+    </update>
+
+    <update id="updateAdministratorName" parameterType="map">
+        UPDATE administrator SET administrator_name=#{administrator_name} WHERE administrator_character=#{administrator_character}
+    </update>
+
+    <select id="getDepartmentidByPartner_id" parameterType="int" resultType="int">
+        SELECT department_id FROM partner WHERE partner_id=#{partner_id}
+    </select>
+
+    <select id="getDepartmentNameByDepartmentid" parameterType="int" resultType="string">
+        SELECT DISTINCT department_industry_title FROM department d,partner p WHERE d.department_id=p.department_id AND p.department_id=#{departmentId}
+    </select>
+
+    <update id="updateDepartment_number_quantity2" parameterType="map">
+         UPDATE department SET department_number_quantity=#{department_number_quantity} WHERE department_id=#{department_id}
+    </update>
+
+</mapper>

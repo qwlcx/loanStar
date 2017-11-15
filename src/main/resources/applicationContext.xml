@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--引入db.properties-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.uname}"></property>
+        <property name="password" value="${jdbc.upass}"></property>
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+
+        <property name="initialPoolSize" value="${initialSize}"></property>
+        <property name="maxPoolSize" value="${maxSize}"></property>
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--引入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--加载mybatis配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!--加载映射文件-->
+        <property name="mapperLocations" value="classpath:com/loanstar/entity/*.xml"></property>
+    </bean>
+
+
+
+
+    <!--配置PersonDao-->
+    <!--配置多次-->
+    <!--<bean id="personDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="com.lxj.mapper.PersonDao"></property>
+    </bean>-->
+
+    <!--配置一次-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.loanstar.dao"></property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.A_RDao">
+    <insert id="addA_R" parameterType="A_R">
+        INSERT INTO a_r(administrator_id,role_id) VALUES (#{administrator_id},#{role_id})
+    </insert>
+</mapper>

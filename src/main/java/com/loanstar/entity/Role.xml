@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.RoleDao">
+
+    <resultMap id="roleMap" type="com.loanstar.entity.Role">
+        <id property="role_id" column="role_id"></id>
+        <result property="role_name" column="role_name"></result>
+        <result property="role_describe" column="role_describe"></result>
+        <collection property="managers" ofType="com.loanstar.entity.Manager">
+            <id property="manager_id" column="manager_id"></id>
+            <result property="manage_character" column="manage_character"></result>
+            <result property="manage_register_time" column="manage_register_time"></result>
+            <result property="manage_name" column="manage_name"></result>
+            <result property="manager_state" column="manager_state"></result>
+            <result property="facility_id" column="facility_id"></result>
+            <result property="role_id" column="role_id"></result>
+        </collection>
+    </resultMap>
+
+
+
+    <select id="getRoleAll" parameterType="map" resultType="Role">
+        SELECT * FROM role
+        <where>
+            <if test="role_name != null and role_name != ''">
+                AND role_name like concat(concat('%',#{role_name}),'%')
+            </if>
+            <if test="role_describe != null and role_describe != ''">
+                AND role_describe like concat(concat('%',#{role_describe}),'%')
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getRoleDescribes" resultType="string">
+        SELECT role_describe FROM role
+    </select>
+
+    <select id="getRolePage" resultType="int">
+        SELECT COUNT(*) FROM role
+        <where>
+            <if test="role_name != null and role_name != ''">
+                AND role_name like concat(concat('%',#{role_name}),'%')
+            </if>
+            <if test="role_describe != null and role_describe != ''">
+                AND role_describe like concat(concat('%',#{role_describe}),'%')
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <delete id="deleteRole" parameterType="int">
+        DELETE FROM role WHERE role_id=#{role_id}
+    </delete>
+
+    <select id="getRoleNumber" parameterType="int" resultMap="roleMap">
+        SELECT r.*,m.* FROM role r,manager m WHERE r.role_id=m.role_id and r.role_id=#{role_id}
+    </select>
+
+    <select id="getPermissionNames" resultType="string">
+        SELECT DISTINCT permission_name FROM permission
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loanstar.dao.AdministratorDao">
+    <!--登录-->
+    <select id="administratorLogin" parameterType="Administrator" resultType="Administrator">
+        SELECT * FROM administrator WHERE administrator_character=#{administrator_character} AND administrator_password=#{administrator_password}
+    </select>
+
+    <!--根据管理员账号获得管理员姓名-->
+    <select id="getAdministrator_name" parameterType="string" resultType="string">
+        SELECT administrator_name FROM administrator WHERE administrator_character=#{administrator_character}
+    </select>
+
+    <select id="getAdministrator_id"  parameterType="string" resultType="int">
+        SELECT administrator_id FROM administrator WHERE administrator_character=#{administrator_character}
+    </select>
+
+
+    <select id="getRoleByCharacter1" parameterType="string" resultType="Integer">
+        SELECT role_id FROM partner WHERE partner_character=#{administrator_character}
+    </select>
+
+    <select id="getRoleByCharacter2" parameterType="string" resultType="Integer">
+        SELECT role_id FROM manager WHERE manager_character=#{administrator_character}
+    </select>
+
+    <select id="getRoleName" parameterType="Integer" resultType="string">
+        SELECT role_name FROM role WHERE role_id=#{role_id}
+    </select>
+
+    <select id="getRoleName2" parameterType="Integer" resultType="string">
+        SELECT role_name FROM role WHERE role_id=#{role_id}
+    </select>
+
+    <update id="upPass" parameterType="map">
+        UPDATE Administrator SET administrator_password=#{administrator_password} WHERE administrator_character=#{administrator_character}
+    </update>
+
+</mapper>

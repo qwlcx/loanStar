@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loanstar.dao.FacilityDao">
+    
+    <resultMap id="facilityMap" type="com.loanstar.entity.Facility">
+        <id property="facility_id" column="facility_id"></id>
+        <result property="facility_time" column="facility_time"></result>
+        <result property="facility_type" column="facility_type"></result>
+        <result property="facility_orgization_name" column="facility_orgization_name"></result>
+        <result property="facility_loclel" column="facility_loclel"></result>
+        <result property="facility_name" column="facility_name"></result>
+        <collection property="managers" ofType="com.loanstar.entity.Manager">
+            <id property="manager_id" column="manager_id"></id>
+            <result property="manager_character" column="manager_character"></result>
+            <result property="manager_register_time" column="manager_register_time"></result>
+            <result property="manager_name" column="manager_name"></result>
+            <result property="manager_state" column="manager_state"></result>
+            <result property="facility_id" column="facility_id"></result>
+        </collection>
+    </resultMap>
+    
+    
+    
+    <insert id="addFacility" parameterType="Facility">
+        INSERT INTO facility(facility_time,facility_type,facility_orgization_name,facility_loclel,facility_name)
+         VALUES (#{facility_time},#{facility_type},#{facility_orgization_name},#{facility_loclel},#{facility_name});
+    </insert>
+
+    <select id="getFacilityAll" parameterType="map" resultType="Facility">
+        SELECT * FROM facility
+        <where>
+            <if test="facility_orgization_name != null  and facility_orgization_name != ''">
+                AND facility_orgization_name like concat(concat('%',#{facility_orgization_name}),'%')
+            </if>
+            <if test="facility_type != null  and facility_type != ''">
+                AND facility_type like concat(concat('%',#{facility_type}),'%')
+            </if>
+        </where>
+         limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getPageAll" resultType="int">
+        SELECT COUNT(*) FROM facility
+        <where>
+            <if test="facility_orgization_name != null  and facility_orgization_name != ''">
+                AND facility_orgization_name like concat(concat('%',#{facility_orgization_name}),'%')
+            </if>
+            <if test="facility_type != null  and facility_type != ''">
+                AND facility_type like concat(concat('%',#{facility_type}),'%')
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <delete id="deleteFacility" parameterType="int">
+        DELETE FROM facility WHERE facility_id=#{facility_id}
+    </delete>
+
+    <update id="updateFacility" parameterType="Facility">
+        UPDATE facility SET facility_type=#{facility_type},facility_orgization_name=#{facility_orgization_name},facility_loclel=#{facility_loclel},
+        facility_name=#{facility_name},facility_time=#{facility_time} WHERE facility_id=#{facility_id}
+    </update>
+
+
+    <select id="getManagerByFacility_id" parameterType="int" resultMap="facilityMap">
+        SELECT f.*,m.* FROM facility f,manager m WHERE f.facility_id=m.facility_id and f.facility_id=#{facility_id}
+    </select>
+
+
+    <select id="getFacility" parameterType="string" resultType="Facility">
+        SELECT * FROM facility WHERE facility_orgization_name=#{facility_orgization_name}
+    </select>
+
+</mapper>

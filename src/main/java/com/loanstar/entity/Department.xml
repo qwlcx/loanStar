@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loanstar.dao.DepartmentDao">
+
+    <resultMap id="departmentMap" type="com.loanstar.entity.Department">
+        <id property="department_id" column="department_id"></id>
+        <result property="department_time" column="department_time"></result>
+        <result property="department_industry_title" column="department_industry_title"></result>
+        <result property="department_number_quantity" column="department_number_quantity"></result>
+        <result property="department_name" column="department_name"></result>
+        <collection property="managers2" ofType="com.loanstar.entity.Manager">
+            <id property="manager_id" column="manager_id"></id>
+            <result property="manager_character" column="manager_character"></result>
+            <result property="manager_register_time" column="manager_register_time"></result>
+            <result property="manager_name" column="manager_name"></result>
+            <result property="manager_state" column="manager_state"></result>
+            <result property="facility_id" column="facility_id"></result>
+        </collection>
+    </resultMap>
+
+
+        <select id="getDepartmentAll" parameterType="map" resultType="Department">
+        SELECT * FROM department
+            <where>
+                <if test="department_id != null  and department_id != ''">
+                    AND department_id like concat(concat('%',#{department_id}),'%')
+                </if>
+                <if test="department_industry_title != null  and department_industry_title != ''">
+                    AND department_industry_title like concat(concat('%',#{department_industry_title}),'%')
+                </if>
+            </where>
+            limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getDepartmentPage" resultType="int">
+        SELECT COUNT(*) FROM department
+        <where>
+            <if test="department_id != null  and department_id != ''">
+                AND department_id like concat(concat('%',#{department_id}),'%')
+            </if>
+            <if test="department_industry_title != null  and department_industry_title != ''">
+                AND department_industry_title like concat(concat('%',#{department_industry_title}),'%')
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <insert id="addDepartment" parameterType="Department">
+        INSERT INTO department(department_time,department_industry_title,department_number_quantity,department_name)
+        VALUES (#{department_time},#{department_industry_title},#{department_number_quantity},#{department_name})
+    </insert>
+
+    <delete id="deleteDep" parameterType="int">
+        DELETE FROM department WHERE department_id=#{department_id}
+    </delete>
+
+
+    <select id="getManagerByDepartment_id" parameterType="int" resultMap="departmentMap">
+            SELECT d.*,m.* FROM department d,manager m WHERE d.department_id=m.department_id and d.department_id=#{department_id}
+    </select>
+
+
+    <update id="upDepartment" parameterType="Department">
+        UPDATE department SET department_time=#{department_time},department_industry_title=#{department_industry_title},
+         department_name=#{department_name} WHERE department_id=#{department_id}
+    </update>
+
+
+    <select id="getDepartmentNumber" parameterType="int" resultMap="departmentMap">
+        SELECT COUNT(*) FROM department d,manager m WHERE d.department_id=m.department_id and d.department_id=#{department_id}
+    </select>
+
+    <select id="getDepartment" parameterType="string" resultType="Department">
+        SELECT * FROM department WHERE department_industry_title=#{department_industry_title}
+    </select>
+
+</mapper>
