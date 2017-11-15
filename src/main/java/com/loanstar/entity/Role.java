@@ -10,6 +10,20 @@ public class Role {
 
 
 
+    public Role(String role_name, String role_describe, Set<Manager> managers) {
+        this.role_name = role_name;
+        this.role_describe = role_describe;
+        this.managers = managers;
+    }
+
+    public Role(int role_id, String role_name, String role_describe, Set<Manager> managers) {
+        this.role_id = role_id;
+        this.role_name = role_name;
+        this.role_describe = role_describe;
+        this.managers = managers;
+    }
+
+
     public Role() {
     }
 

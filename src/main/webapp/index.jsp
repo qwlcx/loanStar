@@ -47,7 +47,7 @@
                                <li><a href="department.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>部门管理</a></li>
                                <li><a href="facility.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>服务机构</a></li>
                                <li><a href="partner.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right3"></i>FA(贷款合作商)管理</a></li>
-                               <li><a href="partner.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right4"></i>人员管理</a></li>
+                               <li><a href="MgFacRole.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right4"></i>人员管理</a></li>
                                <li><a href="role.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right5"></i>角色与权限</a></li>
                    </ul>
                </li>
@@ -58,8 +58,8 @@
                <li class="menu-list">
                    <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>金融机构<s class="sz"></s></a>
                    <ul>
-                                <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>金融机构列表</a></li>
-                                <li><a href="产品管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>金融产品列表</a></li>
+                                <li><a href="financial.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>金融机构列表</a></li>
+                                <li><a href="products.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>金融产品列表</a></li>
                    </ul>
                </li>
                </c:when>
@@ -89,8 +89,7 @@
                <li class="menu-list">
                    <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>客户管理<s class="sz"></s></a>
                    <ul>
-                               <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>客户管理列表</a></li>
-                               <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>客户管理列表</a></li>
+                               <li><a href="client.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>客户管理列表</a></li>
                                <li><a href="产品管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>贷款支付订单管理</a></li>
                                <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>客户信用记录</a></li>
                    </ul>

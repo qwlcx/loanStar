@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.FinancialDao">
+    <resultMap id="financialMap" type="com.loanstar.entity.Financial">
+        <id property="financial_id" column="financial_id"></id>
+        <result property="financial_register_time" column="financial_register_time"></result>
+        <result property="financial_institution_number" column="financial_institution_number"></result>
+        <result property="financial_name" column="financial_name"></result>
+        <result property="financial_telphone" column="financial_telphone"></result>
+        <result property="financial_remark" column="financial_remark"></result>
+        <result property="financial_state" column="financial_state"></result>
+        <collection property="products" ofType="com.loanstar.entity.Products">
+            <id property="products_id" column="products_id"></id>
+            <result property="products_name" column="products_name"></result>
+            <result property="products_time" column="products_time"></result>
+            <result property="products_online_payment" column="products_online_payment"></result>
+            <result property="products_payment_method" column="products_payment_method"></result>
+            <result property="products_collection_service" column="products_collection_service"></result>
+            <result property="products_scan_service" column="products_scan_service"></result>
+            <result property="products_shibor" column="products_shibor"></result>
+            <result property="products_condition" column="products_condition"></result>
+            <result property="products_limit_range" column="products_limit_range"></result>
+            <result property="products_time_range" column="products_time_range"></result>
+            <result property="products_credit_cycle" column="products_credit_cycle"></result>
+            <result property="products_funding_cost" column="products_funding_cost"></result>
+            <result property="products_earmark" column="products_earmark"></result>
+            <result property="products_credit_field" column="products_credit_field"></result>
+            <result property="products_material" column="products_material"></result>
+            <result property="products_state" column="products_state"></result>
+        </collection>
+    </resultMap>
+
+    <insert id="addFinancial" parameterType="Financial">
+        INSERT INTO financial(financial_institution_number,financial_name,financial_telphone,financial_remark,financial_state,financial_register_time) VALUE (#{financial_institution_number},#{financial_name},#{financial_telphone},#{financial_remark},#{financial_state},#{financial_register_time})
+    </insert>
+    <select id="getFinancial" resultType="Financial">
+        SELECT * from financial limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getFinancialAll" parameterType="int" resultMap="financialMap">
+        SELECT f.*,p.* FROM financial f,products p where f.financial_id=p.financial_id
+    </select>
+    <delete id="deleteFinancial" parameterType="int">
+        delete from financial where financial_id = #{financial_id}
+    </delete>
+    <update id="updateFinancial" parameterType="Financial">
+        update financial set financial_institution_number = #{financial_institution_number},financial_name = #{financial_name},financial_telphone = #{financial_telphone},financial_remark = #{financial_remark} where financial_id = #{financial_id}
+    </update>
+    <select id="getFinancial_institution_numberByFinanical_id" resultType="string" parameterType="int">
+        select financial_institution_number FROM financial where financial_id = #{financial_id}
+    </select>
+    <select id="getFinancialCount" resultType="int">
+        select COUNT(*) FROM financial
+    </select>
+</mapper>

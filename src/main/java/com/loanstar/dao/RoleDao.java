@@ -8,6 +8,32 @@ import java.util.Map;
 
 public interface RoleDao {
     /**
+     * 查询所有的角色
+     * @return 所有的角色
+     */
+    public List<Role> getRoleManager();
+
+    /**
+     * 两表查询总页数
+     * @return 总页数
+     */
+    public int getRoleManagerCount();
+
+    /**
+     * 根据角色名称查询角色ID
+     * @param role_name 角色名称
+     * @return 角色ID
+     */
+    public int getRole_idByRole_name(String role_name);
+
+    /**
+     * 根据角色ID 查询角色名称
+     * @param role_id 根据角色ID
+     * @return 返回角色名称
+     */
+    public String getRole_nameByRole_id(int role_id);
+
+    /**
      * 查询所有角色（模糊查询）
      * @param map
      * @return

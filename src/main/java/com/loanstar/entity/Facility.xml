@@ -21,6 +21,19 @@
             <result property="facility_id" column="facility_id"></result>
         </collection>
     </resultMap>
+
+
+    <select id="getFacilityManager" resultMap="facilityMap">
+        select DISTINCT f.facility_id,f.facility_orgization_name,m.manager_id,m.administrator_id,m.manager_register_time,m.manager_character,m.manager_name,m.manager_state FROM facility f,manager m
+    </select>
+
+    <select id="getFacility_idByFacility_orgization_name" parameterType="string" resultType="int">
+        select facility_id FROM facility where facility_orgization_name = #{facility_orgization_name}
+    </select>
+
+    <select id="getFacility_typeByFacility_id" resultType="string" parameterType="int">
+        select facility_type FROM facility where facility_id = #{facility_id}
+    </select>
     
     
     
@@ -42,7 +55,7 @@
          limit #{pageNo},#{pageSize}
     </select>
 
-    <select id="getPageAll" resultType="int">
+    <select id="getPageAll" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM facility
         <where>
             <if test="facility_orgization_name != null  and facility_orgization_name != ''">

@@ -1,7 +1,5 @@
 package com.loanstar.entity;
 
-import java.util.Date;
-
 public class Administrator {
     private int administrator_id;//管理员ID
     private String administrator_character;//管理员账号
@@ -15,6 +13,15 @@ public class Administrator {
         this.administrator_register_time = administrator_register_time;
         this.administrator_name = administrator_name;
     }
+
+
+    public Administrator(String administrator_character, String administrator_register_time, String administrator_name, String administrator_state) {
+        this.administrator_character = administrator_character;
+        this.administrator_register_time = administrator_register_time;
+        this.administrator_name = administrator_name;
+        this.administrator_state = administrator_state;
+    }
+
 
     public Administrator() {
     }

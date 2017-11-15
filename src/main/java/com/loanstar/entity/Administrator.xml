@@ -39,4 +39,17 @@
         UPDATE Administrator SET administrator_password=#{administrator_password} WHERE administrator_character=#{administrator_character}
     </update>
 
+    <insert id="addAdministrator" parameterType="Administrator">
+        INSERT INTO administrator(administrator_character,administrator_register_time,administrator_name) VALUES
+        (#{administrator_character},#{administrator_register_time},#{administrator_name})
+    </insert>
+
+    <select id="getAdministratorByAdministrator_character" parameterType="string" resultType="int">
+        select administrator_id FROM administrator where administrator_character = #{administrator_character}
+    </select>
+
+    <delete id="deleteAdministrator" parameterType="int">
+        delete from administrator where administrator_id = #{administrator_id}
+    </delete>
+
 </mapper>

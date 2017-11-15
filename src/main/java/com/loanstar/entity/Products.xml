@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.ProductsDao">
+    <insert id="addProducts" parameterType="Products">
+        INSERT INTO Products(products_name,products_time,financial_telphone,financial_remark,financial_state,financial_register_time) VALUE (#{financial_institution_number},#{financial_name},#{financial_telphone},#{financial_remark},#{financial_state},#{financial_register_time})
+    </insert>
+    <select id="getProducts" parameterType="map" resultType="Products">
+        SELECT * from products limit #{pageNo},#{pageSize}
+    </select>
+    <delete id="deleteProducts" parameterType="int">
+        delete from products where products_id = #{products_id}
+    </delete>
+    <update id="updateProducts" parameterType="Products">
+        update products set products_name = #{products_name},products_online_payment = #{products_online_payment},products_payment_method = #{products_payment_method} where products_id = #{products_id}
+    </update>
+    <select id="getProductsCount" resultType="int">
+        select COUNT(*) FROM products
+    </select>
+</mapper>

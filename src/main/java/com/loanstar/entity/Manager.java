@@ -14,6 +14,30 @@ public class Manager {
     public Manager() {
     }
 
+    public Manager(String manager_register_time, String manager_character, String manager_name, int administrator_id, int role_id, int facility_id) {
+        this.manager_register_time = manager_register_time;
+        this.manager_character = manager_character;
+        this.manager_name = manager_name;
+        this.administrator_id = administrator_id;
+        this.role_id = role_id;
+        this.facility_id = facility_id;
+    }
+
+    public Manager(int administrator_id, String manager_register_time, String manager_character, String manager_name, int facility_id, int role_id, int department_id) {
+        this.administrator_id = administrator_id;
+        this.manager_register_time = manager_register_time;
+        this.manager_character = manager_character;
+        this.manager_name = manager_name;
+        this.facility_id = facility_id;
+        this.role_id = role_id;
+        this.department_id = department_id;
+    }
+
+    public Manager(int manager_id, String manager_state) {
+        this.manager_id = manager_id;
+        this.manager_state = manager_state;
+    }
+
     public Manager(String manager_register_time, String manager_character, String manager_name, String manager_state, int facility_id, int role_id, int administrator_id) {
         this.manager_register_time = manager_register_time;
         this.manager_character = manager_character;
@@ -29,7 +53,7 @@ public class Manager {
         this.manager_register_time = manager_register_time;
         this.manager_character = manager_character;
         this.manager_name = manager_name;
-        manager_state = manager_state;
+        this.manager_state = manager_state;
         this.facility_id = facility_id;
         this.role_id = role_id;
         this.administrator_id = administrator_id;
@@ -80,7 +104,7 @@ public class Manager {
     }
 
     public void setManager_state(String manager_state) {
-        manager_state = manager_state;
+        this.manager_state = manager_state;
     }
 
     public int getFacility_id() {

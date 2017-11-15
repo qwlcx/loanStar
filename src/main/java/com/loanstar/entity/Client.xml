@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.ClientDao">
+    <select id="getClientAll" parameterType="map" resultType="Client">
+        SELECT * from client limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getClientCount" resultType="int">
+        select COUNT(*) FROM client
+    </select>
+    <delete id="deleteClient" parameterType="int">
+        delete from client where client_id = #{client_id}
+    </delete>
+    <update id="updateClient" parameterType="Client">
+        update client set client_name = #{client_name},client_telphone = #{client_telphone},client_id_number = #{client_id_number},client_card_number = #{client_card_number} where client_id = #{client_id}
+    </update>
+</mapper>

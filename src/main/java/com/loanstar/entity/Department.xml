@@ -21,6 +21,25 @@
         </collection>
     </resultMap>
 
+    <select id="getDepartment_industry_title" resultType="Department">
+        SELECT * from department
+    </select>
+
+    <select id="getDdepartment_number_quantityByDepartment_industry_title" resultType="int" parameterType="string">
+        SELECT department_number_quantity from department where department_industry_title = #{department_industry_title}
+    </select>
+
+    <select id="getDepartment_industry_titleByDepartment_id" resultType="int" parameterType="string">
+        SELECT department_id from department where department_industry_title = #{department_industry_title}
+    </select>
+
+    <update id="updateDepartment_number_quantity" parameterType="Department" >
+        update department set department_number_quantity = #{department_number_quantity} where department_industry_title = #{department_industry_title}
+    </update>
+
+    <select id="getDepartment__industry_titleByDepartment_id" resultType="string" parameterType="int">
+        select department_industry_title FROM department where department_id = #{department_id}
+    </select>
 
         <select id="getDepartmentAll" parameterType="map" resultType="Department">
         SELECT * FROM department
@@ -35,7 +54,7 @@
             limit #{pageNo},#{pageSize}
     </select>
 
-    <select id="getDepartmentPage" resultType="int">
+    <select id="getDepartmentPage" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM department
         <where>
             <if test="department_id != null  and department_id != ''">

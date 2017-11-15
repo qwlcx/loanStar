@@ -5,6 +5,27 @@ import com.loanstar.entity.Administrator;
 import java.util.Map;
 
 public interface AdministratorDao {
+
+    /**
+     * 添加一个管理员
+     * @param administrator 传进去一个对象
+     */
+    public void addAdministrator(Administrator administrator);
+
+    /**
+     * 根据管理员账号查询管理员ID
+     * @param administrator_character 管理员账号
+     * @return 管理员ID
+     */
+    public int getAdministratorByAdministrator_character(String administrator_character);
+
+    /**
+     * 删除一个管理员
+     * @param administrator_id 管理员ID
+     *
+     */
+    public void deleteAdministrator(int administrator_id);
+
     /**
      * 修改管理员密码
      * @param map

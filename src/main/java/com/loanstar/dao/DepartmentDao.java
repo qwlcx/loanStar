@@ -25,6 +25,41 @@ public interface DepartmentDao {
 
 
     /**
+     * 查询所有部门类型
+     * @return 所有部门类型
+     */
+    public List<Department> getDepartment_industry_title();
+
+    /**
+     * 根据部门类型查出部门人数
+     * @param department_industry_title 部门类型
+     * @return 部门人数
+     */
+    public int getDdepartment_number_quantityByDepartment_industry_title(String department_industry_title);
+
+    /**
+     * 根据部门类型查出部门ID
+     * @param department_industry_title 部门类型
+     * @return 部门ID
+     */
+    public int getDepartment_industry_titleByDepartment_id(String department_industry_title);
+
+    /**
+     * 根据部门类型修改部门人数
+     * @param department
+     * @return 部门人数
+     */
+    public void updateDepartment_number_quantity(Department department);
+
+    /**
+     * 根据ID查询部门类型
+     * @param department_id 根据部门ID
+     * @return 返回部门类型
+     */
+    public String getDepartment__industry_titleByDepartment_id(int department_id);
+
+
+    /**
      * 添加部门
      * @param department
      * @Author 李小娟

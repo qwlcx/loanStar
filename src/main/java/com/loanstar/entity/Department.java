@@ -12,6 +12,10 @@ public class Department {
 
     public Department() {
     }
+    public Department(String department_industry_title, int department_number_quantity) {
+        this.department_industry_title = department_industry_title;
+        this.department_number_quantity = department_number_quantity;
+    }
 
     public Department(String department_time, String department_industry_title, String department_name) {
         this.department_time = department_time;

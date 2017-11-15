@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.ManagerDao">
+    <delete id="deleteManager" parameterType="int">
+        delete from manager where manager_id=#{manager_id}
+    </delete>
+    <update id="updateManager" parameterType="Manager">
+        update manager set manager_state = #{manager_state} where manager_id = #{manager_id}
+    </update>
+    <insert id="addManager" parameterType="Manager">
+        INSERT INTO manager(administrator_id,manager_register_time,manager_character,manager_name,facility_id,role_id,department_id)VALUE(#{administrator_id},#{manager_register_time},#{manager_character},#{manager_name},#{facility_id},#{role_id},#{department_id})
+    </insert>
+    <select id="getAdmini_idByManager" resultType="int" parameterType="int">
+        select administrator_id FROM manager WHERE manager_id = #{manager_id}
+    </select>
+    <select id="getManagerAll" parameterType="map" resultType="Manager">
+        SELECT * from manager limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getManagerCount" resultType="int">
+        select COUNT(*) FROM manager
+    </select>
+</mapper>

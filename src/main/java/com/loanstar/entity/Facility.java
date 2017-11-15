@@ -13,6 +13,24 @@ public class Facility {
     private String facility_name;//机构添加人姓名
     private Set<Manager> managers;
 
+    public Facility(String facility_time, String facility_type, String facility_orgization_name, String facility_loclel, String facility_name, Set<Manager> managers) {
+        this.facility_time = facility_time;
+        this.facility_type = facility_type;
+        this.facility_orgization_name = facility_orgization_name;
+        this.facility_loclel = facility_loclel;
+        this.facility_name = facility_name;
+        this.managers = managers;
+    }
+
+    public Facility(int facility_id, String facility_time, String facility_type, String facility_orgization_name, String facility_loclel, String facility_name, Set<Manager> managers) {
+        this.facility_id = facility_id;
+        this.facility_time = facility_time;
+        this.facility_type = facility_type;
+        this.facility_orgization_name = facility_orgization_name;
+        this.facility_loclel = facility_loclel;
+        this.facility_name = facility_name;
+        this.managers = managers;
+    }
 
     public Set<Manager> getManagers() {
         return managers;

@@ -19,7 +19,21 @@
         </collection>
     </resultMap>
 
+    <select id="getRoleManager" resultMap="roleMap">
+        select DISTINCT r.role_id,r.role_name,m.manager_id,m.administrator_id,m.manager_register_time,m.manager_character,m.manager_name,m.manager_state FROM role r,manager m
+    </select>
 
+    <select id="getRoleManagerCount" resultType="int">
+        select COUNT(*) FROM role r,manager m
+    </select>
+
+    <select id="getRole_idByRole_name" resultType="int" parameterType="string">
+        select role_id FROM role WHERE role_name=#{role_name}
+    </select>
+
+    <select id="getRole_nameByRole_id" resultType="string" parameterType="int">
+        select role_name FROM role where role_id = #{role_id}
+    </select>
 
     <select id="getRoleAll" parameterType="map" resultType="Role">
         SELECT * FROM role

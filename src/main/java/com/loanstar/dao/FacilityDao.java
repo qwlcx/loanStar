@@ -9,6 +9,33 @@ import java.util.Set;
 
 public interface FacilityDao {
     /**
+     * 查询所有的服务机构
+     * @return 所有的服务机构
+     */
+    public List<Facility> getFacilityManager();
+
+    /**
+     * 根据服务机构的名称查询到ID
+     * @param facility_orgization_name 服务机构名称
+     * @return 服务机构ID
+     */
+    public int getFacility_idByFacility_orgization_name(String facility_orgization_name);
+
+    /**
+     * 根据服务ID查询服务类型
+     * @param facility_id
+     * @return 服务类型
+     */
+    public String getFacility_typeByFacility_id(int facility_id);
+
+    /**
+     * 根据服务ID查询服务名称
+     * @param facility_id 根据服务ID
+     * @return 返回服务名称
+     */
+    public String getFinancial_institution_numberByFacility_id(int facility_id);
+
+    /**
      * 服务机构的添加
      * @param facility
      * @Author 李小娟
@@ -20,7 +47,6 @@ public interface FacilityDao {
      * @return List<Facility>
      * @Author 李小娟
      */
-    /*public List<Facility> getFacilityAll(Facility facility);*/
     public List<Facility> getFacilityAll(Map<String, Object> map);
 
     /**
