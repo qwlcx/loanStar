@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.ApplicantsDao">
+    <insert id="addApplicants" parameterType="Applicants" >
+        insert into applicants (applicant_name,applicant_number,applicant_credit_limit,applicant_default_number,applicant_heimingdan) values (#{applicant_name},#{applicant_number},#{applicant_credit_limit},#{applicant_default_number},#{applicant_heimingdan})
+    </insert>
+
+    <select id="selectApplicantsSize" parameterType="String" resultType="Integer">
+        select applicant_number from applicants where applicant_name like concat(concat('%',#{name}),'%')
+    </select>
+
+    <update id="updateNumber">
+        update applicants set applicant_number = #{number} where applicant_name like concat(concat('%',#{name}),'%')
+    </update>
+</mapper>

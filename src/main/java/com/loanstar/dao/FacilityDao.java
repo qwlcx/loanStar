@@ -2,12 +2,28 @@ package com.loanstar.dao;
 
 import com.loanstar.entity.Facility;
 import com.loanstar.entity.Manager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public interface FacilityDao {
+
+    /**
+     * 根据地区查询服务机构
+     * @param loclel   地区
+     * @return
+     */
+    public int getFacilityLoclel(@Param(value = "loclel")String loclel);
+
+    /**
+     * 根据ID查服务机构名字
+     * @param facility_id
+     * @return
+     */
+    public String getFacilityName(@Param(value = "facility_id")int facility_id);
+
     /**
      * 查询所有的服务机构
      * @return 所有的服务机构

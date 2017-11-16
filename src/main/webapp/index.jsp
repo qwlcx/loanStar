@@ -69,14 +69,13 @@
                <li class="menu-list">
                    <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>贷款<s class="sz"></s></a>
                    <ul>
-                       <li><a href="partner.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right7"></i>待分配</a></li>
-                       <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>初审</a></li>
-                       <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>尽职调研</a></li>
-                       <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>复审</a></li>
-                       <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>授信</a></li>
+                       <li><a href="applicantSelect.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>初审</a></li>
+                       <li><a href="applicantDaidiaoyanSelect.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>尽职调研</a></li>
+                       <li><a href="applicantDaiFushenSelect.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>复审</a></li>
+                       <li><a href="applicantDaiShouxinSelect.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>授信</a></li>
                        <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>债权打包</a></li>
                        <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>电子合同管理</a></li>
-                       <li><a href="partner.jsp" target="menuFrame"><i class="glyph-icon icon-chevron-right7"></i>贷款参数管理</a></li>
+                       <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right7"></i>贷款参数管理</a></li>
                        <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>实时风险预警</a></li>
                        <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>黑名单管理</a></li>
                        <li><a href="企业资料管理.html" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>全部贷款</a></li>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.ApplicantDao">
+    <select id="getApplicantController"  resultType="Applicant">
+        select * from applicant where applicant_state = '待审核' limit #{pageNum},#{pageSize}
+    </select>
+
+
+    <select id="getSize" resultType="int">
+        select count(*) from applicant where applicant_state = '待审核'
+    </select>
+
+
+    <insert id="addApplocant" parameterType="Applicant">
+        insert into applicant (applicant_serial_number,applicant_name,applicant_telphone,applicant_id_type,applicant_id_number,applicant_land,applicant_work_age,applicant_address,applicant_use,applicant_aggregate_amount,applicant_email,applicant_card_number,applicant_state,applicant_time,facility_id,partner_id,user_character) values (#{applicant_serial_number},#{applicant_name},#{applicant_telphone},#{applicant_id_type},#{applicant_id_number},#{applicant_land},#{applicant_work_age},#{applicant_address},#{applicant_use},#{applicant_aggregate_amount},#{applicant_email},#{applicant_card_number},#{applicant_state},#{applicant_time},#{facility_id},#{partner_id},#{user_character});
+    </insert>
+
+
+    <select id="getApplicantControllerName"  resultType="Applicant">
+        select * from applicant where user_character = #{name} limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="getSizeName" resultType="int">
+        select count(*) from applicant where applicant_name = #{name}
+    </select>
+
+
+    <update id="updateState" parameterType="String">
+        update applicant set applicant_state = #{state} where applicant_serial_number = #{applicant_serial_number}
+    </update>
+
+
+    <select id="getApplicantControllerState1" resultType="Applicant">
+        select * from applicant where applicant_state = '待调研' limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="getSizeState1" resultType="int">
+        select count(*) from applicant where applicant_state = '待调研'
+    </select>
+
+    <select id="selectById" resultType="Applicant" parameterType="int">
+        select * from applicant where applicant_id = #{id}
+    </select>
+
+    <select id="selectByNumber" resultType="Applicant" parameterType="String">
+        select * from applicant where applicant_serial_number = #{number}
+    </select>
+
+
+    <select id="getApplicantControllerState2" resultType="Applicant">
+        select * from applicant where applicant_state = '待复审' limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="getSizeState2" resultType="int">
+        select count(*) from applicant where applicant_state = '待复审'
+    </select>
+
+    <select id="getApplicantControllerState3" resultType="Applicant">
+        select * from applicant where applicant_state = '待授信' limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="getSizeState3" resultType="int">
+        select count(*) from applicant where applicant_state = '待授信'
+    </select>
+
+</mapper>

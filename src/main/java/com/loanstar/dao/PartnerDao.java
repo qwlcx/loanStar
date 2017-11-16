@@ -3,11 +3,28 @@ package com.loanstar.dao;
 import com.loanstar.dto.PartnerDto;
 import com.loanstar.entity.Administrator;
 import com.loanstar.entity.Partner;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 public interface PartnerDao {
+
+
+    /**
+     * 根据服务机构ID查询合作贷款商
+     * @param facility_id
+     * @return
+     */
+    public int getPartnerFacility_id(@Param(value = "facility_id")int facility_id);
+
+    /**
+     * 根据FAID查询FA名字
+     * @param partner_id
+     * @return
+     */
+    public String getPartnerName(@Param(value = "partner_id")int partner_id);
+
 
     /**
      * 联表（FA表，角色表，机构表，部门表）查询

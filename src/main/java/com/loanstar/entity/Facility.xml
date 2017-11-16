@@ -87,4 +87,12 @@
         SELECT * FROM facility WHERE facility_orgization_name=#{facility_orgization_name}
     </select>
 
+    <select id="getFacilityLoclel" resultType="int" parameterType="String">
+        select facility_id from facility where facility_loclel like concat(concat('%',#{loclel}),'%')
+    </select>
+
+    <select id="getFacilityName" resultType="String" parameterType="int">
+        select facility_name from facility where facility_id = #{facility_id}
+    </select>
+
 </mapper>

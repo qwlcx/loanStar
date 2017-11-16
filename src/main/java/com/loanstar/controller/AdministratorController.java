@@ -73,36 +73,4 @@ public class AdministratorController {
         return "upPassWord";
         }
 
-
-//    @RequestMapping("login22")
-//    public void login(HttpServletRequest request, HttpServletResponse response){
-//        String name=request.getParameter("name");
-//        System.out.println(name);
-//        String pass=request.getParameter("pass");
-//        System.out.println(pass);
-//        Administrator administrator=new Administrator(name,pass);
-//        Administrator administrator1=administratorDao.administratorLogin(administrator);
-//        if(administrator1==null){
-//            try {
-//                PrintWriter pw=response.getWriter();
-//                pw.write("userLogin.html");
-//                pw.close();
-//                pw.flush();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        String administrator_name=administratorDao.getAdministrator_name(name);
-//        HttpSession session=request.getSession();
-//        session.setAttribute("administrator_name",administrator_name);
-//        session.setAttribute("administrator_character",pass);
-//        try {
-//            PrintWriter pw=response.getWriter();
-//            pw.write("index.jsp");
-//            pw.close();
-//            pw.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

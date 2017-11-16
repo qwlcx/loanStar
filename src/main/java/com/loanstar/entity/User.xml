@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.UserDao">
+<select id="userLogin" parameterType="User" resultType="User">
+    SELECT * FROM user where User_character = #{User_character} and User_password= #{User_password}
+</select>
+
+<insert id="userAdd" parameterType="User">
+    insert into user (User_character,User_password,User_register_time) VALUES  (#{User_character},#{User_password},#{User_register_time})
+</insert>
+</mapper>

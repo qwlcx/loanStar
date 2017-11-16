@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
@@ -51,43 +53,23 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- 添加 -->
-<%--<div class="modal" id="mymodal1">--%>
-    <%--<div class="modal-dialog">--%>
-        <%--<div class="modal-content">--%>
-            <%--<div class="modal-body">--%>
-                <%--<input class="input-text radius" type="text" name="client_name2" id="client_name2" placeholder="请输入客户姓名"><br/>--%>
-                <%--<input class="input-text radius" type="text" name="client_telphone2" id="client_telphone2" placeholder="请输入客户联系电话"><br/>--%>
-                <%--<input class="input-text radius" type="text" name="client_id_type2" id="client_id_type2" placeholder="请输入证件类型"><br/>--%>
-                <%--<input class="input-text radius" type="text" name="client_id_number2" id="client_id_number2" placeholder="请输入证件号"><br/>--%>
-                <%--<input class="input-text radius" type="text" name="financial_remark" id="financial_remark" placeholder="备注"><br/>--%>
-                <%--<input class="input-text radius" type="text" name="financial_state" id="financial_state" placeholder="状态"><br/>--%>
-                <%--<button type="button" class="btn btn-default add2" data-dismiss="modal" style="margin-left: 40%;">确认</button>--%>
-                <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
-            <%--</div>--%>
-        <%--</div><!-- /.modal-content -->--%>
-    <%--</div><!-- /.modal-dialog -->--%>
-<%--</div><!-- /.modal -->--%>
 <script type="text/javascript">
     $(function () {
-
         var client_id;
-
         //1.初始化Table
         var oTable = new TableInit();
         oTable.Init();
-
         //2.初始化Button的点击事件
         var oButtonInit = new ButtonInit();
         oButtonInit.Init();
-
     });
 
+<c:choose>
+    <c:when test="${roleName1=='贷款风控人员' or roleName2=='贷款风控人员' or roleName1=='贷款财务人员' or roleName2=='贷款财务人员'}">
     var TableInit = function () {
         var oTableInit = new Object();
         //初始化Table
         oTableInit.Init = function () {
-
             $('#myt').bootstrapTable({
                 url: '/getClientAll.action',         //请求后台的URL（*）
                 method: 'get',                      //请求方式（*）
@@ -174,7 +156,88 @@
         };
         return oTableInit;
     };
+    </c:when>
+    <c:otherwise>
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            $('#myt').bootstrapTable({
+                url: '/getClientAll.action',         //请求后台的URL（*）
+                method: 'get',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortable: true,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 7,                       //每页的记录行数（*）
+                pageList: [14, 21, 28, 35],        //可供选择的每页的行数（*）
+                search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                strictSearch: true,
+                showColumns: true,                  //是否显示所有的列
+                showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 2,             //最少允许的列数
+                clickToSelect: true,                //是否启用点击选中行
+                height: 510,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "client_id",                     //每一行的唯一标识，一般为主键列
+                showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+                columns:  [{
+                    title: '客户管理ID',
+                    field: 'client_id',
+                    align: 'center',
+                    valign: 'middle',
+                    visible:false
+                }, {
+                    title: '客户姓名',
+                    field: 'client_name',
+                    align: 'center',
+                    valign: 'middle',
+                }, {
+                    title: '联系电话',
+                    field: 'client_telphone',
+                    align: 'center',
+                    valign: 'middle',
+                }, {
+                    title: '身份证号',
+                    field: 'client_id_number',
+                    align: 'center',
+                    valign: 'middle',
+                }, {
+                    title: '服务机构',
+                    field: 'facility_type',
+                    align: 'center',
+                    valign: 'middle',
+                }, {
+                    title: '卡号',
+                    field: 'client_card_number',
+                    align: 'center',
+                    valign: 'middle',
+                }],
+                onClickCell:function(field, value, row) {
+                    client_id=row.client_id;
+                }
+            });
+        };
 
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit,   //页面大小
+                offset: params.offset  //页码
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+
+    </c:otherwise>
+    </c:choose>
 
     var ButtonInit = function () {
         var oInit = new Object();

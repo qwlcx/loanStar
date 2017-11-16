@@ -256,7 +256,14 @@
                 columns: [
                     {field: 'permission_id',title: '权限编号',align:'center'},
                     {field: 'permission_name',title: '权限名',align:'center'},
-                    {field: 'permission_state',title: '权限状态',align:'center'}
+                    {field: 'permission_state',title: '权限状态',align:'center'},{
+                        title: '操作',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            var f = '<button  class="btn btn-primary radius"  onclick=""></button> ';
+                            return f;
+                        }
+                    }
                 ]
             });
         };

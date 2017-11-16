@@ -17,6 +17,7 @@ public class Partner {
     public Partner() {
     }
 
+
     public Partner(int partner_id, String partner_name, String partner_address, String partner_telphone, int facility_id, int role_id, int department_id) {
         this.partner_id = partner_id;
         this.partner_name = partner_name;

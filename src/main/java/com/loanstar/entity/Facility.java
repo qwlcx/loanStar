@@ -22,6 +22,7 @@ public class Facility {
         this.managers = managers;
     }
 
+
     public Facility(int facility_id, String facility_time, String facility_type, String facility_orgization_name, String facility_loclel, String facility_name, Set<Manager> managers) {
         this.facility_id = facility_id;
         this.facility_time = facility_time;

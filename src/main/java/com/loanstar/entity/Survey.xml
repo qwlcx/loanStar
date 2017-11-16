@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.SurveyDao">
+    <insert id="addSurvey" parameterType="Survey">
+        insert into survey (applicant_id,urvey_sex,survey_foreign_nationlity,survey_education,survey_marry,survey_birth,survey_work_unitis,survey_position,survey_native_place,survey_address_now,survey_shop_house,survey_homestead,survey_agricultural_machinery,survey_sedan,survey_contract_land,survey_land,survey_liabilities,survey_produation_cost,survey_sale_procceds,survey_bad_record,survey_financing_or_landing,survey_banck,survey_variety,survey_balance,survey_interest_or_margin,survey_due_date,survey_guaranty_style,survey_guarantor,survey_other) values (#{applicant_id},#{urvey_sex},#{survey_foreign_nationlity},#{survey_education},#{survey_marry},#{survey_birth},#{survey_work_unitis},#{survey_position},#{survey_native_place},#{survey_address_now},#{survey_shop_house},#{survey_homestead},#{survey_agricultural_machinery},#{survey_sedan},#{survey_contract_land},#{survey_land},#{survey_liabilities},#{survey_produation_cost},#{survey_sale_procceds},#{survey_bad_record},#{survey_financing_or_landing},#{survey_banck},#{survey_variety},#{survey_balance},#{survey_interest_or_margin},#{survey_due_date},#{survey_guaranty_style},#{survey_guarantor},#{survey_other})
+    </insert>
+
+
+    <select id="getSurveyById" resultType="Survey">
+        select * from survey where applicant_id = #{id} limit #{pageNum},#{pageSize}
+    </select>
+
+
+    <select id="getSize" resultType="int">
+        select count(*) from survey where applicant_id = #{id}
+    </select>
+</mapper>

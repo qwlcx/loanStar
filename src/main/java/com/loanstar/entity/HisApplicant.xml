@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loanstar.dao.HisApplicantDao">
+    <select id="getHisApplicantName"  resultType="HisApplicant">
+        select * from hisapplicant where user_character = #{name} limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="getSizeName" resultType="int">
+        select count(*) from hisapplicant where applicant_name = #{name}
+    </select>
+
+    <insert id="addHisApplicant" parameterType="HisApplicant">
+        insert into hisapplicant (applicant_id,applicant_serial_number,applicant_name,applicant_telphone,applicant_id_type,applicant_id_number,applicant_land,applicant_work_age,applicant_address,applicant_use,applicant_aggregate_amount,applicant_email,applicant_card_number,applicant_state,applicant_time,facility_id,partner_id,user_character,applicant_trueorfalse,applicant_yuanyin) values (#{applicant_id},#{applicant_serial_number},#{applicant_name},#{applicant_telphone},#{applicant_id_type},#{applicant_id_number},#{applicant_land},#{applicant_work_age},#{applicant_address},#{applicant_use},#{applicant_aggregate_amount},#{applicant_email},#{applicant_card_number},#{applicant_state},#{applicant_time},#{facility_id},#{partner_id},#{user_character},#{applicant_trueorfalse},#{applicant_yuanyin})
+    </insert>
+</mapper>
